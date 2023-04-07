@@ -94,16 +94,15 @@ async function atualizaCampoEspecifico(req, res) {
     let id = req.params.id
     let body = req.body
 
-    if (id && body) {
-        await atualizarEspecifico(body)
-        json.result = {
-            body
-        }
+    if (id && body.lanche) {
+        await atualizarEspecifico(id, body.lanche)
+        return res.status(200).send();
+    } else {
+        return res.status(400).json({
+            message: "falta passar o id ou o lanche!"
+        })
     }
-    res.status(201).send(`Requisição recebida com sucesso! ${id}`);
 }
-
-
 
 
 
